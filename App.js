@@ -30,6 +30,35 @@ export default function App() {
     }
   }
 
+  async function cadastrarMaterial() {
+    if (!nome.trim() || !quantidade.trim()) {
+      return;
+    }
+
+    try {
+      const response = await fetch('http://6a2b3e66b687a7d5cbc501c6.mockapi.io/materiais', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome,
+          quantidade: Number(quantidade),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro ao cadastrar material: ${response.status}`);
+      }
+
+      setNome('');
+      setQuantidade('');
+      await carregarMateriais();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     carregarMateriais();
   }, []);
