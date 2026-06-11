@@ -7,8 +7,28 @@ export default function App() {
   const [quantidade, setQuantidade] = useState('');
   const [tipo, setTipo] = useState('');
   const [validade, setValidade] = useState('');
+  const [materiais, setMateriais] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
+  async function carregarMateriais() {
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://6a2b3e66b687a7d5cbc501c6.mockapi.io/materiais');
+
+      if (!response.ok) {
+        throw new Error(`Erro ao carregar materiais: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setMateriais(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <View style={styles.container}>
