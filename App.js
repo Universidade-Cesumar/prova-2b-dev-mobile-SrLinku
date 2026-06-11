@@ -44,7 +44,26 @@ export default function App() {
         Através desta interface conectada à API, é possível realizar o inventário em tempo real, cadastrar novos materiais e registrar baixas de estoque de forma ágil e segura.
       </Text>
 
-      {/* Os alunos vão construir os componentes visuais das Sprints aqui dentro */}
+      <TextInput
+        style={styles.input}
+        testID="input-nome"
+        placeholder="Nome do material"
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <TextInput
+        style={styles.input}
+        testID="input-quantidade"
+        placeholder="Quantidade"
+        keyboardType="numeric"
+        value={quantidade}
+        onChangeText={setQuantidade}
+      />
+
+      <TouchableOpacity style={styles.button} testID="btn-cadastrar">
+        <Text style={styles.buttonText}>Cadastrar</Text>
+      </TouchableOpacity>
       
     </View>
   );
@@ -70,5 +89,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 20, // Dá um espaçamento confortável entre as linhas do parágrafo
     marginBottom: 30, // Margem inferior para afastar o texto dos futuros inputs dos alunos
-  }
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 12,
+    fontSize: 16,
+  },
+  button: {
+    backgroundColor: '#007AFF',
+    borderRadius: 8,
+    padding: 14,
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
