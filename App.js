@@ -90,7 +90,7 @@ export default function App() {
         onChangeText={setQuantidade}
       />
 
-      <TouchableOpacity style={styles.button} testID="btn-cadastrar">
+      <TouchableOpacity style={styles.button} testID="btn-cadastrar" onPress={cadastrarMaterial}>
         <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
       
