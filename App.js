@@ -110,9 +110,11 @@ export default function App() {
         style={styles.list}
         contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
-          <View style={styles.listItem}>
+          <View style={styles.card}>
             <Text style={styles.itemNome}>{item.nome}</Text>
-            <Text style={styles.itemQuantidade}>Quantidade: {item.quantidade}</Text>
+            <Text style={styles.itemDetail}>Quantidade: {item.quantidade}</Text>
+            <Text style={styles.itemDetail}>Tipo: {item.tipo || 'Não informado'}</Text>
+            <Text style={styles.itemDetail}>Validade: {item.validade || 'Não informado'}</Text>
           </View>
         )}
       />
@@ -189,21 +191,24 @@ const styles = StyleSheet.create({
   listContent: {
     paddingTop: 8,
     paddingBottom: 24,
+    gap: 12,
   },
-  listItem: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    paddingVertical: 16,
-    paddingHorizontal: 4,
+  card: {
+    backgroundColor: '#f8f9fa',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e9ecef',
+    padding: 16,
   },
   itemNome: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 6,
+    marginBottom: 12,
   },
-  itemQuantidade: {
+  itemDetail: {
     fontSize: 14,
     color: '#666',
+    lineHeight: 22,
   },
 });
