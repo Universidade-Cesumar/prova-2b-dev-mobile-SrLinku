@@ -73,26 +73,28 @@ export default function App() {
         Através desta interface conectada à API, é possível realizar o inventário em tempo real, cadastrar novos materiais e registrar baixas de estoque de forma ágil e segura.
       </Text>
 
-      <TextInput
-        style={styles.input}
-        testID="input-nome"
-        placeholder="Nome do material"
-        value={nome}
-        onChangeText={setNome}
-      />
+      <View style={styles.form}>
+        <TextInput
+          style={styles.input}
+          testID="input-nome"
+          placeholder="Nome do material"
+          value={nome}
+          onChangeText={setNome}
+        />
 
-      <TextInput
-        style={styles.input}
-        testID="input-quantidade"
-        placeholder="Quantidade"
-        keyboardType="numeric"
-        value={quantidade}
-        onChangeText={setQuantidade}
-      />
+        <TextInput
+          style={styles.input}
+          testID="input-quantidade"
+          placeholder="Quantidade"
+          keyboardType="numeric"
+          value={quantidade}
+          onChangeText={setQuantidade}
+        />
 
-      <TouchableOpacity style={styles.button} testID="btn-cadastrar" onPress={cadastrarMaterial}>
-        <Text style={styles.buttonText}>Cadastrar</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} testID="btn-cadastrar" onPress={cadastrarMaterial}>
+          <Text style={styles.buttonText}>Cadastrar</Text>
+        </TouchableOpacity>
+      </View>
 
       {loading && (
         <ActivityIndicator size="large" color="#007AFF" style={styles.loading} />
@@ -103,6 +105,7 @@ export default function App() {
         data={materiais}
         keyExtractor={(item) => item.id}
         style={styles.list}
+        contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
           <View style={styles.listItem}>
             <Text style={styles.itemNome}>{item.nome}</Text>
@@ -134,22 +137,30 @@ const styles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
     lineHeight: 20, // Dá um espaçamento confortável entre as linhas do parágrafo
-    marginBottom: 30, // Margem inferior para afastar o texto dos futuros inputs dos alunos
+    marginBottom: 24,
+  },
+  form: {
+    marginBottom: 8,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
   },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 8,
-    padding: 12,
-    marginBottom: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    marginBottom: 16,
     fontSize: 16,
   },
   button: {
     backgroundColor: '#007AFF',
     borderRadius: 8,
-    padding: 14,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: 4,
   },
   buttonText: {
     color: '#fff',
@@ -157,25 +168,30 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   loading: {
-    marginTop: 20,
+    marginVertical: 16,
   },
   list: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 8,
+  },
+  listContent: {
+    paddingTop: 8,
+    paddingBottom: 24,
   },
   listItem: {
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
-    paddingVertical: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 4,
   },
   itemNome: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#333',
+    marginBottom: 6,
   },
   itemQuantidade: {
     fontSize: 14,
     color: '#666',
-    marginTop: 4,
   },
 });
