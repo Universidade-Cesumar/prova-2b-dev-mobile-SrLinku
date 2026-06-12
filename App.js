@@ -24,7 +24,7 @@ export default function App() {
       const data = await response.json();
       setMateriais(data);
     } catch (error) {
-      console.error(error);
+      console.error('Erro na requisição GET de materiais:', error);
     } finally {
       setLoading(false);
     }
@@ -55,7 +55,7 @@ export default function App() {
       setQuantidade('');
       await carregarMateriais();
     } catch (error) {
-      console.error(error);
+      console.error('Erro na requisição POST de materiais:', error);
     }
   }
 
