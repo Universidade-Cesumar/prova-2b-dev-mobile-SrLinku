@@ -93,6 +93,19 @@ export default function App() {
       <TouchableOpacity style={styles.button} testID="btn-cadastrar" onPress={cadastrarMaterial}>
         <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
+
+      <FlatList
+        testID="lista-materiais"
+        data={materiais}
+        keyExtractor={(item) => item.id}
+        style={styles.list}
+        renderItem={({ item }) => (
+          <View style={styles.listItem}>
+            <Text style={styles.itemNome}>{item.nome}</Text>
+            <Text style={styles.itemQuantidade}>Quantidade: {item.quantidade}</Text>
+          </View>
+        )}
+      />
       
     </View>
   );
@@ -138,5 +151,24 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  list: {
+    flex: 1,
+    marginTop: 20,
+  },
+  listItem: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    paddingVertical: 12,
+  },
+  itemNome: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  itemQuantidade: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 4,
   },
 });
