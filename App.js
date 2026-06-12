@@ -65,13 +65,12 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Almoxarifado - Enfermagem</Text>
-      
-      {/* Breve descrição do projeto inserida abaixo */}
-      <Text style={styles.description}>
-        Este template servirá para desenvolver o projeto responsável por modernizar o controle de insumos médicos do almoxarifado. 
-        Através desta interface conectada à API, é possível realizar o inventário em tempo real, cadastrar novos materiais e registrar baixas de estoque de forma ágil e segura.
-      </Text>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Controle de Estoque</Text>
+        <Text style={styles.headerSubtitle}>
+          Consulte e cadastre materiais do almoxarifado de enfermagem.
+        </Text>
+      </View>
 
       <View style={styles.form}>
         <View style={styles.formFields}>
@@ -129,19 +128,22 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 20,
   },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 10, // Reduzido ligeiramente para aproximar o texto explicativo
-    color: '#333',
+  header: {
+    marginBottom: 24,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
   },
-  description: {
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 8,
+  },
+  headerSubtitle: {
     fontSize: 14,
     color: '#666',
-    textAlign: 'center',
-    lineHeight: 20, // Dá um espaçamento confortável entre as linhas do parágrafo
-    marginBottom: 24,
+    lineHeight: 20,
   },
   form: {
     marginBottom: 24,
