@@ -94,6 +94,10 @@ export default function App() {
         <Text style={styles.buttonText}>Cadastrar</Text>
       </TouchableOpacity>
 
+      {loading && (
+        <ActivityIndicator size="large" color="#007AFF" style={styles.loading} />
+      )}
+
       <FlatList
         testID="lista-materiais"
         data={materiais}
@@ -151,6 +155,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  loading: {
+    marginTop: 20,
   },
   list: {
     flex: 1,
