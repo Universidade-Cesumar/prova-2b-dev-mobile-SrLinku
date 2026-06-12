@@ -74,22 +74,26 @@ export default function App() {
       </Text>
 
       <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          testID="input-nome"
-          placeholder="Nome do material"
-          value={nome}
-          onChangeText={setNome}
-        />
+        <View style={styles.formFields}>
+          <TextInput
+            style={styles.input}
+            testID="input-nome"
+            placeholder="Nome do material"
+            placeholderTextColor="#999"
+            value={nome}
+            onChangeText={setNome}
+          />
 
-        <TextInput
-          style={styles.input}
-          testID="input-quantidade"
-          placeholder="Quantidade"
-          keyboardType="numeric"
-          value={quantidade}
-          onChangeText={setQuantidade}
-        />
+          <TextInput
+            style={styles.input}
+            testID="input-quantidade"
+            placeholder="Quantidade"
+            placeholderTextColor="#999"
+            keyboardType="numeric"
+            value={quantidade}
+            onChangeText={setQuantidade}
+          />
+        </View>
 
         <TouchableOpacity style={styles.button} testID="btn-cadastrar" onPress={cadastrarMaterial}>
           <Text style={styles.buttonText}>Cadastrar</Text>
@@ -140,27 +144,33 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   form: {
-    marginBottom: 8,
-    paddingBottom: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    marginBottom: 24,
+    padding: 20,
+    backgroundColor: '#f8f9fa',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e9ecef',
+  },
+  formFields: {
+    gap: 16,
+    marginBottom: 20,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#dee2e6',
     borderRadius: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    marginBottom: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
     fontSize: 16,
+    backgroundColor: '#fff',
+    color: '#333',
   },
   button: {
     backgroundColor: '#007AFF',
     borderRadius: 8,
-    paddingVertical: 14,
-    paddingHorizontal: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
     alignItems: 'center',
-    marginTop: 4,
   },
   buttonText: {
     color: '#fff',
