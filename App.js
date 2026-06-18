@@ -40,7 +40,14 @@ export default function App() {
   }
 
   function baixarMaterial(material, quantidadeRetirada) {
-    validarRetirada(material.quantidade, Number(quantidadeRetirada));
+    const retiradaValida = validarRetirada(
+      material.quantidade,
+      Number(quantidadeRetirada)
+    );
+
+    if (!retiradaValida) {
+      return;
+    }
   }
 
   function excluirMaterial() {}
