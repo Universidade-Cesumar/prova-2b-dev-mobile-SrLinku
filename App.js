@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { validarRetirada } from './src/utils/validacoes';
 
 export default function App() {
   // --- Estados da Aplicação (Os alunos implementarão aqui) ---
@@ -38,8 +39,8 @@ export default function App() {
     }
   }
 
-  function baixarMaterial(material) {
-    const quantidadeRetirada = retiradas[material.id] || '';
+  function baixarMaterial(material, quantidadeRetirada) {
+    validarRetirada(material.quantidade, Number(quantidadeRetirada));
   }
 
   function excluirMaterial() {}
@@ -144,7 +145,7 @@ export default function App() {
               <TouchableOpacity
                 style={styles.buttonBaixar}
                 testID="btn-baixar"
-                onPress={() => baixarMaterial(item)}
+                onPress={() => baixarMaterial(item, retiradas[item.id] || '')}
               >
                 <Text style={styles.buttonText}>Baixar</Text>
               </TouchableOpacity>
