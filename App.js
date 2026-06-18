@@ -48,6 +48,16 @@ export default function App() {
     if (!retiradaValida) {
       return;
     }
+
+    const qtdRetirada = Number(quantidadeRetirada);
+
+    setMateriais((prev) =>
+      prev.map((item) =>
+        item.id === material.id
+          ? { ...item, quantidade: item.quantidade - qtdRetirada }
+          : item
+      )
+    );
   }
 
   function excluirMaterial() {}
