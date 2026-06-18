@@ -38,7 +38,9 @@ export default function App() {
     }
   }
 
-  function baixarMaterial() {}
+  function baixarMaterial(material) {
+    const quantidadeRetirada = retiradas[material.id] || '';
+  }
 
   function excluirMaterial() {}
 
@@ -142,7 +144,7 @@ export default function App() {
               <TouchableOpacity
                 style={styles.buttonBaixar}
                 testID="btn-baixar"
-                onPress={baixarMaterial}
+                onPress={() => baixarMaterial(item)}
               >
                 <Text style={styles.buttonText}>Baixar</Text>
               </TouchableOpacity>
