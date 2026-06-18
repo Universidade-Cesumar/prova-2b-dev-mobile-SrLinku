@@ -39,7 +39,7 @@ export default function App() {
     }
   }
 
-  function baixarMaterial(material, quantidadeRetirada) {
+  async function baixarMaterial(material, quantidadeRetirada) {
     const retiradaValida = validarRetirada(
       material.quantidade,
       Number(quantidadeRetirada)
@@ -50,14 +50,35 @@ export default function App() {
     }
 
     const qtdRetirada = Number(quantidadeRetirada);
+    const novaQuantidade = material.quantidade - qtdRetirada;
 
-    setMateriais((prev) =>
-      prev.map((item) =>
-        item.id === material.id
-          ? { ...item, quantidade: item.quantidade - qtdRetirada }
-          : item
-      )
-    );
+    try {
+      const response = await fetch(
+        `http://6a2b3e66b687a7d5cbc501c6.mockapi.io/materiais/${material.id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            nome: material.nome,
+            quantidade: novaQuantidade,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Erro ao atualizar material: ${response.status}`);
+      }
+
+      setRetiradas((prev) => ({
+        ...prev,
+        [material.id]: '',
+      }));
+      await carregarMateriais();
+    } catch (error) {
+      console.error('Erro na requisição PUT de materiais:', error);
+    }
   }
 
   function excluirMaterial() {}
