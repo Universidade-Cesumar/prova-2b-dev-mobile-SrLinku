@@ -30,6 +30,10 @@ export default function App() {
     }
   }
 
+  function baixarMaterial() {}
+
+  function excluirMaterial() {}
+
   async function cadastrarMaterial() {
     if (!nome.trim() || !quantidade.trim()) {
       return;
@@ -115,6 +119,32 @@ export default function App() {
             <Text style={styles.itemDetail}>Quantidade: {item.quantidade}</Text>
             <Text style={styles.itemDetail}>Tipo: {item.tipo || 'Não informado'}</Text>
             <Text style={styles.itemDetail}>Validade: {item.validade || 'Não informado'}</Text>
+
+            <View style={styles.cardActions}>
+              <TextInput
+                style={styles.inputRetirada}
+                testID="input-retirada"
+                placeholder="Qtd. retirada"
+                placeholderTextColor="#999"
+                keyboardType="numeric"
+              />
+
+              <TouchableOpacity
+                style={styles.buttonBaixar}
+                testID="btn-baixar"
+                onPress={baixarMaterial}
+              >
+                <Text style={styles.buttonText}>Baixar</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.buttonExcluir}
+                testID="btn-excluir"
+                onPress={excluirMaterial}
+              >
+                <Text style={styles.buttonText}>Excluir</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
       />
@@ -210,5 +240,39 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     lineHeight: 22,
+  },
+  cardActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginTop: 16,
+    paddingTop: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#e9ecef',
+  },
+  inputRetirada: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#dee2e6',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    fontSize: 14,
+    backgroundColor: '#fff',
+    color: '#333',
+  },
+  buttonBaixar: {
+    backgroundColor: '#007AFF',
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+  },
+  buttonExcluir: {
+    backgroundColor: '#dc3545',
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    alignItems: 'center',
   },
 });
