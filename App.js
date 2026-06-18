@@ -81,7 +81,9 @@ export default function App() {
     }
   }
 
-  function excluirMaterial() {}
+  function excluirMaterial(material) {
+    setMateriais((prev) => prev.filter((item) => item.id !== material.id));
+  }
 
   async function cadastrarMaterial() {
     if (!nome.trim() || !quantidade.trim()) {
@@ -191,7 +193,7 @@ export default function App() {
               <TouchableOpacity
                 style={styles.buttonExcluir}
                 testID="btn-excluir"
-                onPress={excluirMaterial}
+                onPress={() => excluirMaterial(item)}
               >
                 <Text style={styles.buttonText}>Excluir</Text>
               </TouchableOpacity>
