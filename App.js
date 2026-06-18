@@ -81,8 +81,23 @@ export default function App() {
     }
   }
 
-  function excluirMaterial(material) {
-    setMateriais((prev) => prev.filter((item) => item.id !== material.id));
+  async function excluirMaterial(material) {
+    try {
+      const response = await fetch(
+        `http://6a2b3e66b687a7d5cbc501c6.mockapi.io/materiais/${material.id}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Erro ao excluir material: ${response.status}`);
+      }
+
+      await carregarMateriais();
+    } catch (error) {
+      console.error('Erro na requisição DELETE de materiais:', error);
+    }
   }
 
   async function cadastrarMaterial() {
