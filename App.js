@@ -9,6 +9,14 @@ export default function App() {
   const [validade, setValidade] = useState('');
   const [materiais, setMateriais] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [retiradas, setRetiradas] = useState({});
+
+  function atualizarRetirada(id, valor) {
+    setRetiradas((prev) => ({
+      ...prev,
+      [id]: valor,
+    }));
+  }
 
   // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
   async function carregarMateriais() {
@@ -127,6 +135,8 @@ export default function App() {
                 placeholder="Qtd. retirada"
                 placeholderTextColor="#999"
                 keyboardType="numeric"
+                value={retiradas[item.id] || ''}
+                onChangeText={(valor) => atualizarRetirada(item.id, valor)}
               />
 
               <TouchableOpacity
