@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { validarRetirada } from './src/utils/validacoes';
 
 export default function App() {
@@ -194,7 +195,8 @@ export default function App() {
             <Text style={styles.itemDetail}>Validade: {item.validade || 'Não informado'}</Text>
 
             {/* Ações por item: retirada de estoque e exclusão */}
-            <View style={styles.cardActions}>              <TextInput
+            <View style={styles.cardActions}>
+              <TextInput
                 style={styles.inputRetirada}
                 testID="input-retirada"
                 placeholder="Qtd. retirada"
@@ -209,7 +211,7 @@ export default function App() {
                 testID="btn-baixar"
                 onPress={() => baixarMaterial(item, retiradas[item.id] || '')}
               >
-                <Text style={styles.buttonText}>Baixar</Text>
+                <Ionicons name="arrow-down-circle-outline" size={22} color="#fff" />
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -217,7 +219,7 @@ export default function App() {
                 testID="btn-excluir"
                 onPress={() => excluirMaterial(item)}
               >
-                <Text style={styles.buttonText}>Excluir</Text>
+                <Ionicons name="trash-outline" size={22} color="#fff" />
               </TouchableOpacity>
             </View>
           </View>
@@ -339,15 +341,15 @@ const styles = StyleSheet.create({
   buttonBaixar: {
     backgroundColor: '#007AFF',
     borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
+    padding: 10,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonExcluir: {
     backgroundColor: '#dc3545',
     borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
+    padding: 10,
     alignItems: 'center',
+    justifyContent: 'center',
   },
 });
