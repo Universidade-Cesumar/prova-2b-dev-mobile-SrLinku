@@ -3,15 +3,20 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Activity
 import { validarRetirada } from './src/utils/validacoes';
 
 export default function App() {
-  // --- Estados da Aplicação (Os alunos implementarão aqui) ---
+  // Estados do formulário de cadastro
   const [nome, setNome] = useState('');
   const [quantidade, setQuantidade] = useState('');
   const [tipo, setTipo] = useState('');
   const [validade, setValidade] = useState('');
+
+  // Lista de materiais carregada da MockAPI
   const [materiais, setMateriais] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  // Quantidades digitadas nos inputs de retirada, indexadas pelo id do material
   const [retiradas, setRetiradas] = useState({});
 
+  // Atualiza o valor de retirada de um material específico sem afetar os demais
   function atualizarRetirada(id, valor) {
     setRetiradas((prev) => ({
       ...prev,
@@ -19,9 +24,8 @@ export default function App() {
     }));
   }
 
-  // --- Funções de Requisição e Efeitos (Os alunos implementarão aqui) ---
-  async function carregarMateriais() {
-    setLoading(true);
+  // Busca todos os materiais e sincroniza a interface com a API
+  async function carregarMateriais() {    setLoading(true);
 
     try {
       const response = await fetch('http://6a2b3e66b687a7d5cbc501c6.mockapi.io/materiais');
@@ -39,12 +43,14 @@ export default function App() {
     }
   }
 
+  // Registra a baixa de estoque: valida, atualiza na API e recarrega a lista
   async function baixarMaterial(material, quantidadeRetirada) {
     const retiradaValida = validarRetirada(
       material.quantidade,
       Number(quantidadeRetirada)
     );
 
+    // Cancela a operação se a retirada for inválida (evita estoque negativo)
     if (!retiradaValida) {
       return;
     }
@@ -71,6 +77,7 @@ export default function App() {
         throw new Error(`Erro ao atualizar material: ${response.status}`);
       }
 
+      // Limpa o input de retirada do item e sincroniza a lista com a API
       setRetiradas((prev) => ({
         ...prev,
         [material.id]: '',
@@ -81,8 +88,8 @@ export default function App() {
     }
   }
 
-  async function excluirMaterial(material) {
-    try {
+  // Remove um material da API e atualiza a lista exibida
+  async function excluirMaterial(material) {    try {
       const response = await fetch(
         `http://6a2b3e66b687a7d5cbc501c6.mockapi.io/materiais/${material.id}`,
         {
@@ -100,8 +107,8 @@ export default function App() {
     }
   }
 
-  async function cadastrarMaterial() {
-    if (!nome.trim() || !quantidade.trim()) {
+  // Envia novo material para a API e recarrega o inventário
+  async function cadastrarMaterial() {    if (!nome.trim() || !quantidade.trim()) {
       return;
     }
 
@@ -129,14 +136,14 @@ export default function App() {
     }
   }
 
+  // Carrega os materiais assim que o app é aberto
   useEffect(() => {
     carregarMateriais();
   }, []);
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Controle de Estoque</Text>
+      <View style={styles.header}>        <Text style={styles.headerTitle}>Controle de Estoque</Text>
         <Text style={styles.headerSubtitle}>
           Consulte e cadastre materiais do almoxarifado de enfermagem.
         </Text>
@@ -186,8 +193,8 @@ export default function App() {
             <Text style={styles.itemDetail}>Tipo: {item.tipo || 'Não informado'}</Text>
             <Text style={styles.itemDetail}>Validade: {item.validade || 'Não informado'}</Text>
 
-            <View style={styles.cardActions}>
-              <TextInput
+            {/* Ações por item: retirada de estoque e exclusão */}
+            <View style={styles.cardActions}>              <TextInput
                 style={styles.inputRetirada}
                 testID="input-retirada"
                 placeholder="Qtd. retirada"
