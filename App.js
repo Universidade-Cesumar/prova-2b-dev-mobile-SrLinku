@@ -197,6 +197,10 @@ export default function App() {
         onChangeText={setBusca}
       />
 
+      <Text style={styles.totalItens} testID="total-itens">
+        Total de itens
+      </Text>
+
       <FlatList
         testID="lista-materials"
         data={materiaisFiltrados}
@@ -307,9 +311,15 @@ const styles = StyleSheet.create({
   loading: {
     marginVertical: 16,
   },
+  totalItens: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 16,
+    marginBottom: 8,
+  },
   list: {
     flex: 1,
-    marginTop: 16,
+    marginTop: 8,
   },
   listContent: {
     paddingTop: 8,
