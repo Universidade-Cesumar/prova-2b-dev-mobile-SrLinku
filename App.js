@@ -17,6 +17,9 @@ export default function App() {
   // Quantidades digitadas nos inputs de retirada, indexadas pelo id do material
   const [retiradas, setRetiradas] = useState({});
 
+  // Termo digitado no campo de busca (filtro será aplicado futuramente)
+  const [busca, setBusca] = useState('');
+
   // Atualiza o valor de retirada de um material específico sem afetar os demais
   function atualizarRetirada(id, valor) {
     setRetiradas((prev) => ({
@@ -181,6 +184,15 @@ export default function App() {
         <ActivityIndicator size="large" color="#007AFF" style={styles.loading} />
       )}
 
+      <TextInput
+        style={styles.input}
+        testID="input-busca"
+        placeholder="Buscar material"
+        placeholderTextColor="#999"
+        value={busca}
+        onChangeText={setBusca}
+      />
+
       <FlatList
         testID="lista-materials"
         data={materiais}
@@ -293,7 +305,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    marginTop: 8,
+    marginTop: 16,
   },
   listContent: {
     paddingTop: 8,
