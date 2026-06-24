@@ -208,7 +208,10 @@ export default function App() {
         style={styles.list}
         contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
-          <View style={obterEstiloCardPorQuantidade(item.quantidade)}>
+          <View
+            style={obterEstiloCardPorQuantidade(item.quantidade)}
+            accessibilityLabel={isEstoqueCritico(item.quantidade) ? 'estoque-critico' : undefined}
+          >
             <Text style={styles.itemNome}>{item.nome}</Text>
             <Text style={obterEstiloQuantidadePorQuantidade(item.quantidade)}>
               Quantidade: {item.quantidade}
@@ -409,12 +412,25 @@ const styles = StyleSheet.create({
   },
 });
 
-// Retorna o estilo do card conforme a quantidade disponível (regra a ser definida)
+// Verifica se o material está com estoque crítico (menos de 10 unidades)
+function isEstoqueCritico(quantidade) {
+  return Number(quantidade) < 10;
+}
+
+// Retorna o estilo do card conforme a quantidade disponível
 function obterEstiloCardPorQuantidade(quantidade) {
+  if (isEstoqueCritico(quantidade)) {
+    return [styles.card, styles.cardEstoqueCritico];
+  }
+
   return [styles.card, styles.cardEstoqueNormal];
 }
 
-// Retorna o estilo do texto de quantidade conforme o estoque (regra a ser definida)
+// Retorna o estilo do texto de quantidade conforme o estoque
 function obterEstiloQuantidadePorQuantidade(quantidade) {
+  if (isEstoqueCritico(quantidade)) {
+    return styles.itemQuantidadeCritico;
+  }
+
   return styles.itemQuantidadeNormal;
 }
