@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, ActivityIndicator, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { validarRetirada } from './src/utils/validacoes';
 
@@ -29,7 +29,8 @@ export default function App() {
   }
 
   // Busca todos os materiais e sincroniza a interface com a API
-  async function carregarMateriais() {    setLoading(true);
+  async function carregarMateriais() {
+    setLoading(true);
 
     try {
       const response = await fetch('http://6a2b3e66b687a7d5cbc501c6.mockapi.io/materiais');
@@ -39,9 +40,13 @@ export default function App() {
       }
 
       const data = await response.json();
-      setMateriais(data);
+      setMateriais(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Erro na requisição GET de materiais:', error);
+      Alert.alert(
+        'Falha na conexão',
+        'Não foi possível carregar os materiais. Verifique sua conexão com a internet e tente novamente.'
+      );
     } finally {
       setLoading(false);
     }
