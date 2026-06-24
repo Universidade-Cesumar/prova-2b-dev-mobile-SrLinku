@@ -17,7 +17,7 @@ export default function App() {
   // Quantidades digitadas nos inputs de retirada, indexadas pelo id do material
   const [retiradas, setRetiradas] = useState({});
 
-  // Termo digitado no campo de busca (filtro será aplicado futuramente)
+  // Termo digitado no campo de busca
   const [busca, setBusca] = useState('');
 
   // Atualiza o valor de retirada de um material específico sem afetar os demais
@@ -145,6 +145,10 @@ export default function App() {
     carregarMateriais();
   }, []);
 
+  const materiaisFiltrados = materiais.filter((material) =>
+    (material.nome || '').toLowerCase().includes(busca.toLowerCase())
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>        <Text style={styles.headerTitle}>Controle de Estoque</Text>
@@ -195,7 +199,7 @@ export default function App() {
 
       <FlatList
         testID="lista-materials"
-        data={materiais}
+        data={materiaisFiltrados}
         keyExtractor={(item) => item.id}
         style={styles.list}
         contentContainerStyle={styles.listContent}
