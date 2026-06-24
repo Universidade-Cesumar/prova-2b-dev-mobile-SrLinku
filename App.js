@@ -94,11 +94,16 @@ export default function App() {
       await carregarMateriais();
     } catch (error) {
       console.error('Erro na requisição PUT de materiais:', error);
+      Alert.alert(
+        'Falha na conexão',
+        'Não foi possível registrar a retirada. Verifique sua conexão com a internet e tente novamente.'
+      );
     }
   }
 
   // Remove um material da API e atualiza a lista exibida
-  async function excluirMaterial(material) {    try {
+  async function excluirMaterial(material) {
+    try {
       const response = await fetch(
         `http://6a2b3e66b687a7d5cbc501c6.mockapi.io/materiais/${material.id}`,
         {
@@ -113,6 +118,10 @@ export default function App() {
       await carregarMateriais();
     } catch (error) {
       console.error('Erro na requisição DELETE de materiais:', error);
+      Alert.alert(
+        'Falha na conexão',
+        'Não foi possível excluir o material. Verifique sua conexão com a internet e tente novamente.'
+      );
     }
   }
 
