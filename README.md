@@ -17,6 +17,20 @@ Principais recursos:
 - Indicador visual de estoque crítico (quantidade menor que 10 unidades)
 - Tratamento de erros de rede com mensagens amigáveis ao usuário
 
+## Capturas de tela
+
+### Visão geral — cadastro e busca
+
+Tela inicial com cabeçalho, formulário de cadastro, campo de busca e início da lista de materiais.
+
+![Tela principal com formulário de cadastro e busca](img/img1.png)
+
+### Lista de materiais — estoque crítico e rodapé
+
+Lista com filtro ativo, totalizador de itens, destaque visual para estoque crítico (ex.: *Lenço*, quantidade 9) e rodapé do aplicativo.
+
+![Lista de materiais com estoque crítico e rodapé](img/img2.png)
+
 ## Tecnologias utilizadas
 
 - **React Native** — construção da interface mobile
