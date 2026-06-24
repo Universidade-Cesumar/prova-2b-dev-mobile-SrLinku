@@ -208,9 +208,11 @@ export default function App() {
         style={styles.list}
         contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
-          <View style={styles.card}>
+          <View style={obterEstiloCardPorQuantidade(item.quantidade)}>
             <Text style={styles.itemNome}>{item.nome}</Text>
-            <Text style={styles.itemDetail}>Quantidade: {item.quantidade}</Text>
+            <Text style={obterEstiloQuantidadePorQuantidade(item.quantidade)}>
+              Quantidade: {item.quantidade}
+            </Text>
             <Text style={styles.itemDetail}>Tipo: {item.tipo || 'Não informado'}</Text>
             <Text style={styles.itemDetail}>Validade: {item.validade || 'Não informado'}</Text>
 
@@ -327,11 +329,21 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   card: {
-    backgroundColor: '#f8f9fa',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#e9ecef',
     padding: 16,
+  },
+  cardEstoqueNormal: {
+    backgroundColor: '#f8f9fa',
+    borderColor: '#e9ecef',
+  },
+  cardEstoqueBaixo: {
+    backgroundColor: '#fff8e1',
+    borderColor: '#ffc107',
+  },
+  cardEstoqueCritico: {
+    backgroundColor: '#fff5f5',
+    borderColor: '#dc3545',
   },
   itemNome: {
     fontSize: 16,
@@ -343,6 +355,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     lineHeight: 22,
+  },
+  itemQuantidadeNormal: {
+    fontSize: 14,
+    color: '#666',
+    lineHeight: 22,
+  },
+  itemQuantidadeBaixo: {
+    fontSize: 14,
+    color: '#856404',
+    lineHeight: 22,
+    fontWeight: '600',
+  },
+  itemQuantidadeCritico: {
+    fontSize: 14,
+    color: '#dc3545',
+    lineHeight: 22,
+    fontWeight: 'bold',
   },
   cardActions: {
     flexDirection: 'row',
@@ -379,3 +408,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+// Retorna o estilo do card conforme a quantidade disponível (regra a ser definida)
+function obterEstiloCardPorQuantidade(quantidade) {
+  return [styles.card, styles.cardEstoqueNormal];
+}
+
+// Retorna o estilo do texto de quantidade conforme o estoque (regra a ser definida)
+function obterEstiloQuantidadePorQuantidade(quantidade) {
+  return styles.itemQuantidadeNormal;
+}
