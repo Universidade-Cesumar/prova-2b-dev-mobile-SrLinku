@@ -198,7 +198,7 @@ export default function App() {
       />
 
       <Text style={styles.totalItens} testID="total-itens">
-        Total de itens
+        Total de itens: {materiaisFiltrados.length}
       </Text>
 
       <FlatList
