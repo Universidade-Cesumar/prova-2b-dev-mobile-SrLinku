@@ -117,7 +117,8 @@ export default function App() {
   }
 
   // Envia novo material para a API e recarrega o inventário
-  async function cadastrarMaterial() {    if (!nome.trim() || !quantidade.trim()) {
+  async function cadastrarMaterial() {
+    if (!nome.trim() || !quantidade.trim()) {
       return;
     }
 
@@ -142,6 +143,10 @@ export default function App() {
       await carregarMateriais();
     } catch (error) {
       console.error('Erro na requisição POST de materiais:', error);
+      Alert.alert(
+        'Falha na conexão',
+        'Não foi possível cadastrar o material. Verifique sua conexão com a internet e tente novamente.'
+      );
     }
   }
 
