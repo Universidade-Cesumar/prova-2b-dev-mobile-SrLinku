@@ -168,9 +168,10 @@ export default function App() {
     (material.nome || '').toLowerCase().includes(busca.toLowerCase())
   );
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>        <Text style={styles.headerTitle}>Controle de Estoque</Text>
+  const cabecalhoLista = (
+    <>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Controle de Estoque</Text>
         <Text style={styles.headerSubtitle}>
           Consulte e cadastre materiais do almoxarifado de enfermagem.
         </Text>
@@ -219,13 +220,26 @@ export default function App() {
       <Text style={styles.totalItens} testID="total-itens">
         Total de itens: {materiaisFiltrados.length}
       </Text>
+    </>
+  );
 
+  const rodapeLista = (
+    <View style={styles.footer}>
+      <Text style={styles.footerText}>Almoxarifado de Enfermagem</Text>
+      <Text style={styles.footerSubtext}>Sistema de controle de insumos médicos</Text>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
       <FlatList
         testID="lista-materials"
         data={materiaisFiltrados}
         keyExtractor={(item) => item.id}
         style={styles.list}
         contentContainerStyle={styles.listContent}
+        ListHeaderComponent={cabecalhoLista}
+        ListFooterComponent={rodapeLista}
         renderItem={({ item }) => (
           <View
             style={obterEstiloCardPorQuantidade(item.quantidade)}
@@ -269,7 +283,6 @@ export default function App() {
           </View>
         )}
       />
-      
     </View>
   );
 }
@@ -343,12 +356,29 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    marginTop: 8,
   },
   listContent: {
-    paddingTop: 8,
+    flexGrow: 1,
     paddingBottom: 24,
     gap: 12,
+  },
+  footer: {
+    marginTop: 24,
+    paddingTop: 20,
+    paddingBottom: 8,
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 4,
+  },
+  footerSubtext: {
+    fontSize: 12,
+    color: '#999',
   },
   card: {
     borderRadius: 12,
